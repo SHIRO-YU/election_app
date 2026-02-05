@@ -75,12 +75,12 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
         font-size: 1.8rem;
         font-weight: 800;
-        color: #1f2937;
+        color: #1e3a8a;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
         border-radius: 8px;
-        background: rgba(102, 126, 234, 0.12);
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(255, 255, 255, 0));
         letter-spacing: 0.02em;
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     }
@@ -89,12 +89,12 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
         font-size: 1.8rem;
         font-weight: 800;
-        color: #f7fafc;
+        color: #e0e7ff;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
         border-radius: 8px;
-        background: rgba(102, 126, 234, 0.2);
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.35), rgba(45, 55, 72, 0));
         letter-spacing: 0.02em;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     }
@@ -540,8 +540,8 @@ def main():
         
         show_explanations = st.checkbox(
             "詳しい解説を表示",
-            value=True,
-            help="政策の詳しい説明を展開可能な形式で表示します"
+            value=False,
+            help="政策の詳しい説明を展開可能な形式で表示します（オンにすると表示項目が増えます）"
         )
         
         st.markdown("---")
