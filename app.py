@@ -105,6 +105,17 @@ st.markdown("""
         background-color: #f3f4f6;
         border-radius: 6px;
     }
+
+    /* ライトモード用の政策カテゴリラベル */
+    [data-testid="stAppViewContainer"][data-theme="light"] .policy-category-label {
+        display: inline-block;
+        padding: 0.15rem 0.6rem;
+        border-radius: 999px;
+        background-color: #e0e7ff;
+        color: #3730a3;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
     
     /* ダークモード用のセクションタイトル */
     [data-testid="stAppViewContainer"][data-theme="dark"] .policy-section-title {
@@ -115,6 +126,22 @@ st.markdown("""
         padding: 0.5rem;
         background-color: #4a5568;
         border-radius: 6px;
+    }
+
+    /* ダークモード用の政策カテゴリラベル */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .policy-category-label {
+        display: inline-block;
+        padding: 0.15rem 0.6rem;
+        border-radius: 999px;
+        background-color: #4338ca;
+        color: #e0e7ff;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .explanation-label {
+        font-weight: 700;
+        margin-bottom: 0.25rem;
     }
     
     /* ライトモード用の政策アイテム */
@@ -354,7 +381,10 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                 policies = personalized[profession]
                 
                 st.markdown(f'<div class="policy-section">', unsafe_allow_html=True)
-                st.markdown(f'<div class="policy-section-title">🏥 {profession}向け政策</div>', unsafe_allow_html=True)
+                st.markdown(
+                    f'<div class="policy-section-title"><span class="policy-category-label">🏥 {profession}向け政策</span></div>',
+                    unsafe_allow_html=True
+                )
                 
                 if isinstance(policies, list):
                     # リスト形式の政策
@@ -370,6 +400,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
 
                         if explanation:
                             with st.expander(f"💡 {policy[:60]}..." if len(policy) > 60 else f"💡 {policy}", expanded=False):
+                                st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
                             st.markdown(f'<div class="policy-item">• {policy}</div>', unsafe_allow_html=True)
@@ -382,6 +413,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
 
                         if explanation:
                             with st.expander(f"💡 {policies[:60]}..." if len(policies) > 60 else f"💡 {policies}", expanded=False):
+                                st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
                             st.markdown(f'<div class="policy-item">{policies}</div>', unsafe_allow_html=True)
@@ -396,7 +428,10 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
         general_explanations = party.get("general_explanations", {}) if show_explanations else {}
         
         st.markdown(f'<div class="policy-section">', unsafe_allow_html=True)
-        st.markdown(f'<div class="policy-section-title">📋 一般政策</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="policy-section-title"><span class="policy-category-label">📋 一般政策</span></div>',
+            unsafe_allow_html=True
+        )
         
         for topic in selected_topics:
             if topic in general:
@@ -406,6 +441,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                 if show_explanations and topic in general_explanations:
                     explanation = general_explanations[topic]
                     with st.expander(f"💡 {topic}: {policy[:50]}..." if len(policy) > 50 else f"💡 {topic}: {policy}", expanded=False):
+                        st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                         st.info(explanation)
                 else:
                     st.markdown(f'<div class="policy-item"><strong>{topic}:</strong> {policy}</div>', 
