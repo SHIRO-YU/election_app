@@ -415,9 +415,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
     
     if has_content:
         st.markdown('<div style="padding: 1.5rem;">', unsafe_allow_html=True)
-    
-    st.markdown(card_html, unsafe_allow_html=True)
-    
+  
     # 専門職向け政策の表示
     if selected_professions and "personalized_policies" in party:
         personalized = party["personalized_policies"]
