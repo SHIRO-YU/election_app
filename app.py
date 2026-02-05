@@ -57,12 +57,12 @@ st.markdown("""
     
     /* ダークモード用の政党カード */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-card {
-        background: #1e293b;
+        background: #2d3748;
         border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        border: 1px solid #334155;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        border: 1px solid #4a5568;
         transition: all 0.3s ease;
     }
     
@@ -85,7 +85,7 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
         font-size: 1.4rem;
         font-weight: 700;
-        color: #e2e8f0;
+        color: #f7fafc;
         margin-bottom: 1rem;
         padding-bottom: 0.75rem;
         border-bottom: 3px solid #667eea;
@@ -110,10 +110,10 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .policy-section-title {
         font-size: 1rem;
         font-weight: 600;
-        color: #cbd5e1;
+        color: #e2e8f0;
         margin-bottom: 0.5rem;
         padding: 0.5rem;
-        background-color: #334155;
+        background-color: #4a5568;
         border-radius: 6px;
     }
     
@@ -133,12 +133,12 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .policy-item {
         padding: 0.6rem 0.8rem;
         margin: 0.4rem 0;
-        background-color: #0f172a;
+        background-color: #1a202c;
         border-left: 3px solid #667eea;
         border-radius: 4px;
         font-size: 0.9rem;
         line-height: 1.6;
-        color: #e2e8f0;
+        color: #f7fafc;
     }
     
     /* ライトモード用の候補者カード */
@@ -153,12 +153,12 @@ st.markdown("""
     
     /* ダークモード用の候補者カード */
     [data-testid="stAppViewContainer"][data-theme="dark"] .candidate-card {
-        background: #1e293b;
+        background: #2d3748;
         border-radius: 8px;
         padding: 1rem;
         margin-bottom: 1rem;
-        border: 1px solid #334155;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        border: 1px solid #4a5568;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     
     /* ライトモード用の候補者名 */
@@ -172,7 +172,7 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .candidate-name {
         font-size: 1.1rem;
         font-weight: 600;
-        color: #e2e8f0;
+        color: #f7fafc;
     }
     
     .candidate-party {
@@ -214,10 +214,10 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="dark"] .section-header {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #e2e8f0;
+        color: #f7fafc;
         margin: 2rem 0 1rem 0;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid #334155;
+        border-bottom: 2px solid #4a5568;
     }
     
     /* レスポンシブ対応 */
