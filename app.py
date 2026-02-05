@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# カスタムCSS - スマートフォン対応のレスポンシブデザイン
+# カスタムCSS - スマートフォン対応のレスポンシブデザイン + ダークモード対応
 st.markdown("""
     <style>
     /* 全体のフォント設定 */
@@ -34,16 +34,18 @@ st.markdown("""
         margin: 0;
         font-size: 1.8rem;
         font-weight: 700;
+        color: white !important;
     }
     
     .header p {
         margin: 0.5rem 0 0 0;
         font-size: 0.95rem;
         opacity: 0.9;
+        color: white !important;
     }
     
-    /* 政党カード */
-    .party-card {
+    /* ライトモード用の政党カード */
+    [data-testid="stAppViewContainer"][data-theme="light"] .party-card {
         background: white;
         border-radius: 12px;
         padding: 1.5rem;
@@ -53,15 +55,37 @@ st.markdown("""
         transition: all 0.3s ease;
     }
     
+    /* ダークモード用の政党カード */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .party-card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        border: 1px solid #334155;
+        transition: all 0.3s ease;
+    }
+    
     .party-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         transform: translateY(-2px);
     }
     
-    .party-name {
+    /* ライトモード用の政党名 */
+    [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
         font-size: 1.4rem;
         font-weight: 700;
         color: #1f2937;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid #667eea;
+    }
+    
+    /* ダークモード用の政党名 */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #e2e8f0;
         margin-bottom: 1rem;
         padding-bottom: 0.75rem;
         border-bottom: 3px solid #667eea;
@@ -71,7 +95,8 @@ st.markdown("""
         margin-bottom: 1.25rem;
     }
     
-    .policy-section-title {
+    /* ライトモード用のセクションタイトル */
+    [data-testid="stAppViewContainer"][data-theme="light"] .policy-section-title {
         font-size: 1rem;
         font-weight: 600;
         color: #4b5563;
@@ -81,7 +106,19 @@ st.markdown("""
         border-radius: 6px;
     }
     
-    .policy-item {
+    /* ダークモード用のセクションタイトル */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .policy-section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #cbd5e1;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        background-color: #334155;
+        border-radius: 6px;
+    }
+    
+    /* ライトモード用の政策アイテム */
+    [data-testid="stAppViewContainer"][data-theme="light"] .policy-item {
         padding: 0.6rem 0.8rem;
         margin: 0.4rem 0;
         background-color: #f9fafb;
@@ -89,10 +126,23 @@ st.markdown("""
         border-radius: 4px;
         font-size: 0.9rem;
         line-height: 1.6;
+        color: #1f2937;
     }
     
-    /* 候補者カード */
-    .candidate-card {
+    /* ダークモード用の政策アイテム */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .policy-item {
+        padding: 0.6rem 0.8rem;
+        margin: 0.4rem 0;
+        background-color: #0f172a;
+        border-left: 3px solid #667eea;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #e2e8f0;
+    }
+    
+    /* ライトモード用の候補者カード */
+    [data-testid="stAppViewContainer"][data-theme="light"] .candidate-card {
         background: white;
         border-radius: 8px;
         padding: 1rem;
@@ -101,10 +151,28 @@ st.markdown("""
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     
-    .candidate-name {
+    /* ダークモード用の候補者カード */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .candidate-card {
+        background: #1e293b;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #334155;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* ライトモード用の候補者名 */
+    [data-testid="stAppViewContainer"][data-theme="light"] .candidate-name {
         font-size: 1.1rem;
         font-weight: 600;
         color: #1f2937;
+    }
+    
+    /* ダークモード用の候補者名 */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .candidate-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #e2e8f0;
     }
     
     .candidate-party {
@@ -118,14 +186,22 @@ st.markdown("""
         font-weight: 500;
     }
     
-    .candidate-note {
+    /* ライトモード用の候補者メモ */
+    [data-testid="stAppViewContainer"][data-theme="light"] .candidate-note {
         color: #6b7280;
         font-size: 0.9rem;
         margin-top: 0.5rem;
     }
     
-    /* セクション見出し */
-    .section-header {
+    /* ダークモード用の候補者メモ */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .candidate-note {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* ライトモード用のセクション見出し */
+    [data-testid="stAppViewContainer"][data-theme="light"] .section-header {
         font-size: 1.5rem;
         font-weight: 700;
         color: #1f2937;
@@ -134,14 +210,14 @@ st.markdown("""
         border-bottom: 2px solid #e5e7eb;
     }
     
-    /* サイドバー */
-    .sidebar .sidebar-content {
-        background-color: #f9fafb;
-    }
-    
-    /* 選択ボックスのスタイリング */
-    .stMultiSelect > div > div {
-        background-color: white;
+    /* ダークモード用のセクション見出し */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .section-header {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #e2e8f0;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #334155;
     }
     
     /* レスポンシブ対応 */
@@ -163,11 +239,18 @@ st.markdown("""
         }
     }
     
-    /* 空状態のメッセージ */
-    .empty-state {
+    /* ライトモード用の空状態メッセージ */
+    [data-testid="stAppViewContainer"][data-theme="light"] .empty-state {
         text-align: center;
         padding: 3rem 1rem;
         color: #6b7280;
+    }
+    
+    /* ダークモード用の空状態メッセージ */
+    [data-testid="stAppViewContainer"][data-theme="dark"] .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #94a3b8;
     }
     
     .empty-state-icon {
