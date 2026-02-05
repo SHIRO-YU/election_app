@@ -372,7 +372,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                        show_explanations: bool = True):
     """
     政党カードを表示（選択された項目のみ）
-    解説機能付き
+    解説機能付き - 政党名を大きく目立たせる
     """
     def normalize_explanation(value: Any) -> str:
         if isinstance(value, list):
@@ -383,12 +383,34 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
         return ""
 
     party_name = party.get("name", "不明な政党")
-    party_id = party.get("id", "")
     
-    # カード開始
-    st.markdown(f'<div class="party-card">', unsafe_allow_html=True)
-    st.markdown(f'<div class="party-name">{party_name}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="party-card-content">', unsafe_allow_html=True)
+    # カード全体のHTML開始（政党名をヘッダーとして表示）
+    card_html = f"""
+    <div style="
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        border: 2px solid #e5e7eb;
+        overflow: hidden;
+    ">
+        <div style="
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            letter-spacing: 0.08em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+        ">
+            {party_name}
+        </div>
+        <div style="padding: 1.5rem;">
+    """
+    
+    st.markdown(card_html, unsafe_allow_html=True)
     
     # 専門職向け政策の表示
     if selected_professions and "personalized_policies" in party:
@@ -399,16 +421,34 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
             if profession in personalized:
                 policies = personalized[profession]
                 
-                st.markdown(f'<div class="policy-section">', unsafe_allow_html=True)
-                st.markdown(
-                    f'<div class="policy-section-title"><span class="policy-category-label">🏥 {profession}向け政策</span></div>',
-                    unsafe_allow_html=True
-                )
+                # セクションタイトル
+                st.markdown(f"""
+                <div style="
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: #1f2937;
+                    margin-bottom: 1rem;
+                    margin-top: 1rem;
+                    padding: 0.75rem 1rem;
+                    background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 100%);
+                    border-radius: 8px;
+                    border-left: 5px solid #667eea;
+                ">
+                    <span style="
+                        display: inline-block;
+                        padding: 0.15rem 0.6rem;
+                        border-radius: 999px;
+                        background-color: #e0e7ff;
+                        color: #3730a3;
+                        font-weight: 700;
+                        font-size: 0.95rem;
+                    ">🏥 {profession}向け政策</span>
+                </div>
+                """, unsafe_allow_html=True)
                 
                 if isinstance(policies, list):
                     # リスト形式の政策
                     for i, policy in enumerate(policies):
-                        # 解説がある場合は展開可能な表示
                         explanation = None
                         if show_explanations and profession in explanations:
                             profession_explanations = explanations.get(profession)
@@ -419,58 +459,113 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
 
                         if explanation:
                             with st.expander(f"💡 {policy}", expanded=False):
-                                st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
+                                st.markdown('<div style="font-weight: 700; margin-bottom: 0.25rem;">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
-                            st.markdown(f'<div class="policy-item">• {policy}</div>', unsafe_allow_html=True)
+                            st.markdown(f"""
+                            <div style="
+                                padding: 0.75rem 1rem;
+                                margin: 0.5rem 0;
+                                background-color: #f9fafb;
+                                border-left: 4px solid #667eea;
+                                border-radius: 6px;
+                                font-size: 0.95rem;
+                                line-height: 1.7;
+                                color: #1f2937;
+                            ">• {policy}</div>
+                            """, unsafe_allow_html=True)
                 
                 elif isinstance(policies, str):
-                    # 文字列形式の政策
                     if show_explanations and profession in explanations:
                         profession_explanations = explanations.get(profession)
                         explanation = normalize_explanation(profession_explanations)
 
                         if explanation:
                             with st.expander(f"💡 {policies}", expanded=False):
-                                st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
+                                st.markdown('<div style="font-weight: 700; margin-bottom: 0.25rem;">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
-                            st.markdown(f'<div class="policy-item">{policies}</div>', unsafe_allow_html=True)
+                            st.markdown(f"""
+                            <div style="
+                                padding: 0.75rem 1rem;
+                                margin: 0.5rem 0;
+                                background-color: #f9fafb;
+                                border-left: 4px solid #667eea;
+                                border-radius: 6px;
+                                font-size: 0.95rem;
+                                line-height: 1.7;
+                                color: #1f2937;
+                            ">{policies}</div>
+                            """, unsafe_allow_html=True)
                     else:
-                        st.markdown(f'<div class="policy-item">{policies}</div>', unsafe_allow_html=True)
-                
-                st.markdown('</div>', unsafe_allow_html=True)
+                        st.markdown(f"""
+                        <div style="
+                            padding: 0.75rem 1rem;
+                            margin: 0.5rem 0;
+                            background-color: #f9fafb;
+                            border-left: 4px solid #667eea;
+                            border-radius: 6px;
+                            font-size: 0.95rem;
+                            line-height: 1.7;
+                            color: #1f2937;
+                        ">{policies}</div>
+                        """, unsafe_allow_html=True)
     
     # 一般政策の表示
     if selected_topics and "general_policies" in party:
         general = party["general_policies"]
         general_explanations = party.get("general_explanations", {}) if show_explanations else {}
         
-        st.markdown(f'<div class="policy-section">', unsafe_allow_html=True)
-        st.markdown(
-            '<div class="policy-section-title"><span class="policy-category-label">📋 一般政策</span></div>',
-            unsafe_allow_html=True
-        )
+        # セクションタイトル
+        st.markdown(f"""
+        <div style="
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        ">
+            <span style="
+                display: inline-block;
+                padding: 0.15rem 0.6rem;
+                border-radius: 999px;
+                background-color: #e0e7ff;
+                color: #3730a3;
+                font-weight: 700;
+                font-size: 0.95rem;
+            ">📋 一般政策</span>
+        </div>
+        """, unsafe_allow_html=True)
         
         for topic in selected_topics:
             if topic in general:
                 policy = general[topic]
                 
-                # 解説がある場合は展開可能な表示
                 if show_explanations and topic in general_explanations:
                     explanation = general_explanations[topic]
                     with st.expander(f"💡 {topic}: {policy}", expanded=False):
-                        st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
+                        st.markdown('<div style="font-weight: 700; margin-bottom: 0.25rem;">解説</div>', unsafe_allow_html=True)
                         st.info(explanation)
                 else:
-                    st.markdown(f'<div class="policy-item"><strong>{topic}:</strong> {policy}</div>', 
-                              unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
+                    st.markdown(f"""
+                    <div style="
+                        padding: 0.75rem 1rem;
+                        margin: 0.5rem 0;
+                        background-color: #f9fafb;
+                        border-left: 4px solid #667eea;
+                        border-radius: 6px;
+                        font-size: 0.95rem;
+                        line-height: 1.7;
+                        color: #1f2937;
+                    "><strong>{topic}:</strong> {policy}</div>
+                    """, unsafe_allow_html=True)
     
     # カード終了
-    st.markdown('</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 
 def display_candidates(district_name: str, candidates: List[Dict]):
