@@ -74,8 +74,8 @@ st.markdown("""
     /* ライトモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
         font-size: 1.8rem;
-        font-weight: 800;
-        color: #0f172a;
+        font-weight: 900;
+        color: #111827;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
@@ -88,8 +88,8 @@ st.markdown("""
     /* ダークモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
         font-size: 1.8rem;
-        font-weight: 800;
-        color: #f8fafc;
+        font-weight: 900;
+        color: #ffffff;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
@@ -312,7 +312,7 @@ def load_election_data() -> Dict[str, Any]:
         st.error(f"データファイルが見つかりません: {json_path}")
         return {"parties": [], "districts": {}}
     except json.JSONDecodeError as e:
-        st.error(f"JSONファイルの形式が正しくありません: {e}")
+        st.error(f"JSONファイル形式が正しくありません: {e}")
         return {"parties": [], "districts": {}}
     except Exception as e:
         st.error(f"データ読み込みエラー: {e}")
@@ -541,7 +541,7 @@ def main():
         show_explanations = st.checkbox(
             "詳しい解説を表示",
             value=False,
-            help="政策の詳しい説明を展開可能な形式で表示します（オンにすると表示項目が増えます"
+            help="政策の詳しい説明を展開可能な形式で表示します（オンにすると表示項目が増えます）"
         )
         
         st.markdown("---")
@@ -583,7 +583,7 @@ def main():
     num_parties = len(parties)
     
     if num_parties == 0:
-        st.warning("表示できる政党がありません")
+        st.warning("表示できる政党があません")
         return
     
     # 2カラムレイアウト
