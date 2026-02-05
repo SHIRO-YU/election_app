@@ -426,7 +426,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                                 explanation = normalize_explanation(profession_explanations)
 
                         if explanation:
-                            with st.expander(f"💡 {policy[:60]}..." if len(policy) > 60 else f"💡 {policy}", expanded=False):
+                            with st.expander(f"💡 {policy}", expanded=False):
                                 st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
@@ -439,7 +439,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                         explanation = normalize_explanation(profession_explanations)
 
                         if explanation:
-                            with st.expander(f"💡 {policies[:60]}..." if len(policies) > 60 else f"💡 {policies}", expanded=False):
+                            with st.expander(f"💡 {policies}", expanded=False):
                                 st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                                 st.info(explanation)
                         else:
@@ -467,7 +467,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                 # 解説がある場合は展開可能な表示
                 if show_explanations and topic in general_explanations:
                     explanation = general_explanations[topic]
-                    with st.expander(f"💡 {topic}: {policy[:50]}..." if len(policy) > 50 else f"💡 {topic}: {policy}", expanded=False):
+                    with st.expander(f"💡 {topic}: {policy}", expanded=False):
                         st.markdown('<div class="explanation-label">解説</div>', unsafe_allow_html=True)
                         st.info(explanation)
                 else:
@@ -541,7 +541,7 @@ def main():
             "職種・立場",
             options=available_professions,
             default=[],
-            help="あなたやご家族に該当する職種を選択してください"
+            help="あなたやご家に該当する職種を選択してください"
         )
         
         st.markdown("---")
