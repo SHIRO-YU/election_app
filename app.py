@@ -388,22 +388,20 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
     card_html = f"""
     <div style="
         background: white;
-        border-radius: 16px;
-        margin-bottom: 2.5rem;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         border: 2px solid #e5e7eb;
         overflow: hidden;
     ">
         <div style="
-            font-size: 2.2rem;
-            font-weight: 900;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: #ffffff;
-            padding: 1.5rem 2rem;
+            padding: 0.9rem 1.5rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            letter-spacing: 0.08em;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
-            border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
         ">
             {party_name}
         </div>
