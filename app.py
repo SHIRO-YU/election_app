@@ -2,6 +2,7 @@ import streamlit as st
 import json
 from typing import Dict, List, Any
 from pathlib import Path
+from html import escape
 
 # ページ設定
 st.set_page_config(
@@ -591,9 +592,10 @@ def display_candidates(district_name: str, candidates: List[Dict]):
         return
     
     for candidate in candidates:
-        name = candidate.get("name", "不明")
-        party = candidate.get("party", "無所属")
-        note = candidate.get("note", "")
+        name = escape(str(candidate.get("name", "不明")))
+        party = escape(str(candidate.get("party", "無所属")))
+        note_value = candidate.get("memo") or candidate.get("note") or ""
+        note = escape(str(note_value))
         
         st.markdown(f"""
             <div class="candidate-card">
