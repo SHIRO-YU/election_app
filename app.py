@@ -405,8 +405,16 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
         ">
             {party_name}
         </div>
-        <div style="padding: 1.5rem;">
     """
+    
+    st.markdown(card_html, unsafe_allow_html=True)
+    
+    # コンテンツエリアの開始（政策がある場合のみパディングを追加）
+    has_content = (selected_professions and "personalized_policies" in party) or \
+                  (selected_topics and "general_policies" in party)
+    
+    if has_content:
+        st.markdown('<div style="padding: 1.5rem;">', unsafe_allow_html=True)
     
     st.markdown(card_html, unsafe_allow_html=True)
     
@@ -563,7 +571,9 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                     """, unsafe_allow_html=True)
     
     # カード終了
-    st.markdown('</div></div>', unsafe_allow_html=True)
+    if has_content:
+        st.markdown('</div>', unsafe_allow_html=True)  # コンテンツエリア終了
+    st.markdown('</div>', unsafe_allow_html=True)  # カード終了
 
 
 def display_candidates(district_name: str, candidates: List[Dict]):
