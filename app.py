@@ -75,28 +75,28 @@ st.markdown("""
     [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
         font-size: 1.8rem;
         font-weight: 800;
-        color: #1e3a8a;
+        color: #0f172a;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
         border-radius: 8px;
-        background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(255, 255, 255, 0));
+        background: #e0e7ff;
         letter-spacing: 0.02em;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+        text-shadow: none;
     }
     
     /* ダークモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
         font-size: 1.8rem;
         font-weight: 800;
-        color: #e0e7ff;
+        color: #f8fafc;
         margin-bottom: 1rem;
         padding: 0.4rem 0.75rem 0.5rem;
         border-left: 6px solid #667eea;
         border-radius: 8px;
-        background: linear-gradient(90deg, rgba(102, 126, 234, 0.35), rgba(45, 55, 72, 0));
+        background: #4338ca;
         letter-spacing: 0.02em;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+        text-shadow: none;
     }
     
     .policy-section {
@@ -521,7 +521,7 @@ def main():
         selected_professions = st.multiselect(
             "職種・立場",
             options=available_professions,
-            default=["医学生"] if "医学生" in available_professions else [],
+            default=[],
             help="あなたやご家族に該当する職種を選択してください"
         )
         
@@ -531,7 +531,7 @@ def main():
         selected_topics = st.multiselect(
             "政策トピック",
             options=available_topics,
-            default=available_topics[:3] if len(available_topics) >= 3 else available_topics,
+            default=[],
             help="比較したい政策分野を選択してください"
         )
         
@@ -541,7 +541,7 @@ def main():
         show_explanations = st.checkbox(
             "詳しい解説を表示",
             value=False,
-            help="政策の詳しい説明を展開可能な形式で表示します（オンにすると表示項目が増えます）"
+            help="政策の詳しい説明を展開可能な形式で表示します（オンにすると表示項目が増えます"
         )
         
         st.markdown("---")
