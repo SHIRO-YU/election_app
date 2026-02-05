@@ -73,22 +73,30 @@ st.markdown("""
     
     /* ライトモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
-        font-size: 1.4rem;
-        font-weight: 700;
+        font-size: 1.8rem;
+        font-weight: 800;
         color: #1f2937;
         margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 3px solid #667eea;
+        padding: 0.4rem 0.75rem 0.5rem;
+        border-left: 6px solid #667eea;
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.12);
+        letter-spacing: 0.02em;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     }
     
     /* ダークモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
-        font-size: 1.4rem;
-        font-weight: 700;
+        font-size: 1.8rem;
+        font-weight: 800;
         color: #f7fafc;
         margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 3px solid #667eea;
+        padding: 0.4rem 0.75rem 0.5rem;
+        border-left: 6px solid #667eea;
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.2);
+        letter-spacing: 0.02em;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
     }
     
     .policy-section {
