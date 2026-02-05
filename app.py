@@ -329,6 +329,14 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
     政党カードを表示（選択された項目のみ）
     解説機能付き
     """
+    def normalize_explanation(value: Any) -> str:
+        if isinstance(value, list):
+            items = [item.strip() for item in value if isinstance(item, str) and item.strip()]
+            return "\n\n".join(items)
+        if isinstance(value, str):
+            return value.strip()
+        return ""
+
     party_name = party.get("name", "不明な政党")
     party_id = party.get("id", "")
     
@@ -351,11 +359,16 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                 if isinstance(policies, list):
                     # リスト形式の政策
                     for i, policy in enumerate(policies):
-                        policy_key = f"{profession}_{i}"
-                        
                         # 解説がある場合は展開可能な表示
-                        if show_explanations and profession in explanations and i < len(explanations.get(profession, [])):
-                            explanation = explanations[profession][i]
+                        explanation = None
+                        if show_explanations and profession in explanations:
+                            profession_explanations = explanations.get(profession)
+                            if isinstance(profession_explanations, list) and i < len(profession_explanations):
+                                explanation = normalize_explanation(profession_explanations[i])
+                            elif isinstance(profession_explanations, str):
+                                explanation = normalize_explanation(profession_explanations)
+
+                        if explanation:
                             with st.expander(f"💡 {policy[:60]}..." if len(policy) > 60 else f"💡 {policy}", expanded=False):
                                 st.info(explanation)
                         else:
@@ -364,9 +377,14 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
                 elif isinstance(policies, str):
                     # 文字列形式の政策
                     if show_explanations and profession in explanations:
-                        explanation = explanations[profession]
-                        with st.expander(f"💡 {policies[:60]}..." if len(policies) > 60 else f"💡 {policies}", expanded=False):
-                            st.info(explanation)
+                        profession_explanations = explanations.get(profession)
+                        explanation = normalize_explanation(profession_explanations)
+
+                        if explanation:
+                            with st.expander(f"💡 {policies[:60]}..." if len(policies) > 60 else f"💡 {policies}", expanded=False):
+                                st.info(explanation)
+                        else:
+                            st.markdown(f'<div class="policy-item">{policies}</div>', unsafe_allow_html=True)
                     else:
                         st.markdown(f'<div class="policy-item">{policies}</div>', unsafe_allow_html=True)
                 
