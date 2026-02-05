@@ -47,71 +47,80 @@ st.markdown("""
     /* ライトモード用の政党カード */
     [data-testid="stAppViewContainer"][data-theme="light"] .party-card {
         background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 0;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        border: 2px solid #e5e7eb;
         transition: all 0.3s ease;
+        overflow: hidden;
     }
     
     /* ダークモード用の政党カード */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-card {
         background: #2d3748;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-        border: 1px solid #4a5568;
+        border-radius: 16px;
+        padding: 0;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        border: 2px solid #4a5568;
         transition: all 0.3s ease;
+        overflow: hidden;
     }
     
     .party-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-4px);
     }
     
     /* ライトモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="light"] .party-name {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
         font-weight: 900;
-        color: #111827;
-        margin-bottom: 1rem;
-        padding: 0.4rem 0.75rem 0.5rem;
-        border-left: 6px solid #667eea;
-        border-radius: 8px;
-        background: #e0e7ff;
-        letter-spacing: 0.02em;
-        text-shadow: none;
+        color: #ffffff;
+        margin: 0;
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        letter-spacing: 0.08em;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        border-bottom: 4px solid rgba(255, 255, 255, 0.3);
     }
     
     /* ダークモード用の政党名 */
     [data-testid="stAppViewContainer"][data-theme="dark"] .party-name {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
         font-weight: 900;
         color: #ffffff;
-        margin-bottom: 1rem;
-        padding: 0.4rem 0.75rem 0.5rem;
-        border-left: 6px solid #667eea;
-        border-radius: 8px;
-        background: #4338ca;
-        letter-spacing: 0.02em;
-        text-shadow: none;
+        margin: 0;
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        letter-spacing: 0.08em;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* カードの内側のパディング */
+    .party-card-content {
+        padding: 1.5rem;
     }
     
     .policy-section {
-        margin-bottom: 1.25rem;
+        margin-bottom: 2rem;
     }
     
     /* ライトモード用のセクションタイトル */
     [data-testid="stAppViewContainer"][data-theme="light"] .policy-section-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #4b5563;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        background-color: #f3f4f6;
-        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 100%);
+        border-radius: 8px;
+        border-left: 5px solid #667eea;
     }
 
     /* ライトモード用の政策カテゴリラベル */
@@ -122,18 +131,20 @@ st.markdown("""
         background-color: #e0e7ff;
         color: #3730a3;
         font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 0.95rem;
     }
     
     /* ダークモード用のセクションタイトル */
     [data-testid="stAppViewContainer"][data-theme="dark"] .policy-section-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #e2e8f0;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        background-color: #4a5568;
-        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #f7fafc;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: linear-gradient(90deg, #4a5568 0%, #2d3748 100%);
+        border-radius: 8px;
+        border-left: 5px solid #667eea;
     }
 
     /* ダークモード用の政策カテゴリラベル */
@@ -144,7 +155,7 @@ st.markdown("""
         background-color: #4338ca;
         color: #e0e7ff;
         font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 0.95rem;
     }
 
     .explanation-label {
@@ -173,25 +184,25 @@ st.markdown("""
     
     /* ライトモード用の政策アイテム */
     [data-testid="stAppViewContainer"][data-theme="light"] .policy-item {
-        padding: 0.6rem 0.8rem;
-        margin: 0.4rem 0;
+        padding: 0.75rem 1rem;
+        margin: 0.5rem 0;
         background-color: #f9fafb;
-        border-left: 3px solid #667eea;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        line-height: 1.6;
+        border-left: 4px solid #667eea;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        line-height: 1.7;
         color: #1f2937;
     }
     
     /* ダークモード用の政策アイテム */
     [data-testid="stAppViewContainer"][data-theme="dark"] .policy-item {
-        padding: 0.6rem 0.8rem;
-        margin: 0.4rem 0;
+        padding: 0.75rem 1rem;
+        margin: 0.5rem 0;
         background-color: #1a202c;
-        border-left: 3px solid #667eea;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        line-height: 1.6;
+        border-left: 4px solid #667eea;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        line-height: 1.7;
         color: #f7fafc;
     }
     
@@ -280,12 +291,9 @@ st.markdown("""
             font-size: 1.4rem;
         }
         
-        .party-card {
-            padding: 1rem;
-        }
-        
         .party-name {
-            font-size: 1.2rem;
+            font-size: 1.6rem !important;
+            padding: 1rem 1.5rem !important;
         }
         
         .section-header {
@@ -360,23 +368,6 @@ def get_all_general_policy_keys(parties: List[Dict]) -> List[str]:
     return sorted(list(topics))
 
 
-def display_policy_with_explanation(policy_text: str, policy_key: str, party_name: str, explanation_data: Dict = None):
-    """
-    政策を表示し、解説がある場合は展開可能にする
-    """
-    # 解説データがある場合
-    if explanation_data and party_name in explanation_data and policy_key in explanation_data[party_name]:
-        explanation = explanation_data[party_name][policy_key]
-        
-        # エクスパンダーで解説を表示
-        with st.expander(f"💡 {policy_text[:50]}..." if len(policy_text) > 50 else f"💡 {policy_text}", expanded=False):
-            st.markdown(f"**詳しい説明:**")
-            st.markdown(explanation)
-    else:
-        # 解説がない場合は通常表示
-        st.markdown(f'<div class="policy-item">• {policy_text}</div>', unsafe_allow_html=True)
-
-
 def display_party_card(party: Dict, selected_professions: List[str], selected_topics: List[str], 
                        show_explanations: bool = True):
     """
@@ -397,6 +388,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
     # カード開始
     st.markdown(f'<div class="party-card">', unsafe_allow_html=True)
     st.markdown(f'<div class="party-name">{party_name}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="party-card-content">', unsafe_allow_html=True)
     
     # 専門職向け政策の表示
     if selected_professions and "personalized_policies" in party:
@@ -478,6 +470,7 @@ def display_party_card(party: Dict, selected_professions: List[str], selected_to
     
     # カード終了
     st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 def display_candidates(district_name: str, candidates: List[Dict]):
@@ -541,7 +534,7 @@ def main():
             "職種・立場",
             options=available_professions,
             default=[],
-            help="あなたやご家に該当する職種を選択してください"
+            help="あなたやご家族に該当する職種を選択してください"
         )
         
         st.markdown("---")
