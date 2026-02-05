@@ -151,6 +151,25 @@ st.markdown("""
         font-weight: 700;
         margin-bottom: 0.25rem;
     }
+
+    /* 長文の折り返し対策（政策・解説） */
+    .party-card .policy-item {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    .party-card [data-testid="stExpander"] summary {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    .party-card [data-testid="stAlert"] {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        white-space: normal;
+    }
     
     /* ライトモード用の政策アイテム */
     [data-testid="stAppViewContainer"][data-theme="light"] .policy-item {
@@ -312,7 +331,7 @@ def load_election_data() -> Dict[str, Any]:
         st.error(f"データファイルが見つかりません: {json_path}")
         return {"parties": [], "districts": {}}
     except json.JSONDecodeError as e:
-        st.error(f"JSONファイル形式が正しくありません: {e}")
+        st.error(f"JSONファイルの形式が正しくありません: {e}")
         return {"parties": [], "districts": {}}
     except Exception as e:
         st.error(f"データ読み込みエラー: {e}")
@@ -583,7 +602,7 @@ def main():
     num_parties = len(parties)
     
     if num_parties == 0:
-        st.warning("表示できる政党があません")
+        st.warning("表示できる政党がありません")
         return
     
     # 2カラムレイアウト
